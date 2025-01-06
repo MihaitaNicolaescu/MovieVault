@@ -18,10 +18,10 @@ function App() {
      <div className='place-items-center'>
       <div className='flex h-96 w-1/2 m-1 items-center gap-0'>
         <Card>
-          <MovieList/>
+          <MovieList setMovieDetails={setMovieDetails}/>
         </Card>
         <Card>
-          {movieDetails === null ? <InfoTile/> : <MovieDetails data={movieDetails}/>}
+          {movieDetails === null ? <InfoTile/> : <MovieDetails data={movieDetails} setMovieDetails={setMovieDetails}/>}
         </Card>
       </div>
      </div>
