@@ -1,9 +1,14 @@
+import { useState } from 'react'
 import './App.css'
 import Card from './components/Card'
+import InfoTile from './components/InfoTile'
 import MovieList from './components/MovieList'
 import Navbar from './components/navbar'
+import MovieDetails from './components/MovieDetails.jsx'
 
 function App() {
+
+  const [movieDetails, setMovieDetails] = useState(null);
 
   return (
     <div className='bg-[#2e343d]-500'>
@@ -15,7 +20,9 @@ function App() {
         <Card>
           <MovieList/>
         </Card>
-        <Card/>
+        <Card>
+          {movieDetails === null ? <InfoTile/> : <MovieDetails data={movieDetails}/>}
+        </Card>
       </div>
      </div>
     </div>
