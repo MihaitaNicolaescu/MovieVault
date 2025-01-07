@@ -46,19 +46,25 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
             <div className="grid grid-flow-row">
                 <div className="bg-gray-700 mt-8 mr-10 ml-10 rounded">
                     <div className="grid grid-flow-row">
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-center mt-2">
                             {Array.from({ length: starsNumber }).map((_, index) => (
-                                    <FontAwesomeIcon
-                                    key={index}
-                                    icon={faStar}
-                                    className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
-                                        index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
-                                    }`}
-                                    onClick={() => setScore(index + 1)}
-                                    onMouseEnter={() => setHoverIndex(index)}
-                                    onMouseLeave={() => setHoverIndex(-1)}
-                                    />
-                                ))}
+                                <FontAwesomeIcon
+                                key={index}
+                                icon={faStar}
+                                className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
+                                    index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
+                                }`}
+                                onClick={() => setScore(index + 1)}
+                                onMouseEnter={() => setHoverIndex(index)}
+                                onMouseLeave={() => setHoverIndex(-1)}
+                                
+                                />
+                            ))}
+                            {(hoverIndex !== -1 || score !== undefined) && (
+                                <p className="text-yellow-400 font-bold text-center pl-2 text-[19px]">
+                                    {hoverIndex !== -1 ? hoverIndex + 1 : score}
+                                </p>
+                            )}
                         </div>
                         <div className="flex items-center justify-center mt-2 mb-2">
                             {score > 0 && (
