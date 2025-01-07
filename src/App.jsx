@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Card from './components/Card'
-import InfoTile from './components/InfoTile'
+import WatchedList from './components/WatchedList.jsx'
 import MovieList from './components/MovieList'
 import Navbar from './components/Navbar.jsx'
 import MovieDetails from './components/MovieDetails.jsx'
@@ -9,7 +9,7 @@ import MovieDetails from './components/MovieDetails.jsx'
 function App() {
 
   const [movieDetails, setMovieDetails] = useState(null);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [watchedMovies, setWatchedMovies] = useState([]);
 
   return (
     <div className='bg-[#2e343d]-500'>
@@ -22,7 +22,7 @@ function App() {
           <MovieList setMovieDetails={setMovieDetails}/>
         </Card>
         <Card>
-          {movieDetails === null ? <InfoTile/> : <MovieDetails data={movieDetails} setMovieDetails={setMovieDetails} savedMovies={savedMovies} setSavedMovies={setSavedMovies}/>}
+          {movieDetails === null ? <WatchedList watchedMovies={watchedMovies} setMovieDetails={setMovieDetails}/> : <MovieDetails data={movieDetails} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} setWatchedMovies={setWatchedMovies}/>}
         </Card>
       </div>
      </div>

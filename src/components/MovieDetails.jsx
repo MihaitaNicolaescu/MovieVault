@@ -2,7 +2,7 @@ import { faArrowLeft, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-function MovieDetails({data, setMovieDetails, savedMovies, setSavedMovies}) {
+function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) {
     const starsNumber = 10;
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -17,8 +17,9 @@ function MovieDetails({data, setMovieDetails, savedMovies, setSavedMovies}) {
     const [hoverIndex, setHoverIndex] = useState(-1);
 
     function addMovieToList(movieData){
-        movieData.givedScore = score;
-        setSavedMovies([...savedMovies, movieData]);
+        let tempMovieData = structuredClone(movieData);
+        tempMovieData.givedScore = score;
+        setWatchedMovies([...watchedMovies, tempMovieData]);
         setMovieDetails(null);
     }
 
@@ -43,7 +44,6 @@ function MovieDetails({data, setMovieDetails, savedMovies, setSavedMovies}) {
                 <div className="bg-gray-700 mt-8 mr-10 ml-10 rounded">
                     <div className="grid grid-flow-row">
                         <div className="flex items-center justify-center">
-
                             {Array.from({ length: starsNumber }).map((_, index) => (
                                     <FontAwesomeIcon
                                     key={index}
@@ -59,7 +59,7 @@ function MovieDetails({data, setMovieDetails, savedMovies, setSavedMovies}) {
                         </div>
                         <div className="flex items-center justify-center mt-2 mb-2">
                             {score > 0 && (
-                                <button className="bg-purple-800 text-white w-1/2 pl-2 pr-2 pt-1 pb-1 text-[13px] mb-3 rounded-lg hover:bg-purple-700" onClick={() => {addMovieToList(data)}}>+ Add to list</button>
+                                <button className="bg-purple-800 text-white w-1/2 pl-2 pr-2 pt-1 pb-1 text-[13px] mb-3 rounded-lg hover:bg-purple-700" onClick={() => {addMovieToList(data)}}>+ Add to watched list</button>
                             )}
                         </div>
                     </div>
