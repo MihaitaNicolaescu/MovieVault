@@ -40,11 +40,11 @@ function MovieList({setMovieDetails}) {
 
     return (
         <div id="movie-list">
-            {
-                movieList.map(movie => (
-                    <MovieTile data={movie} setMovieDetails={setMovieDetails}/>
-                ))
-            }
+          {
+            movieList.map(movie => (
+                <MovieTile data={movie} setMovieDetails={setMovieDetails}/>
+            ))
+          }
         </div>
     )
 }
