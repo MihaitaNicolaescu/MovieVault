@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MovieTile from "./MovieTile";
 
-function WatchedList({watchedMovies, setMovieDetails}) {
+function WatchedList({watchedMovies, setMovieDetails, setWatchedMovies}) {
 
     const [medianScore, setMedianScore] = useState(null);
     const [totalMovies, setTotalMovies] = useState(null);
@@ -19,7 +19,7 @@ function WatchedList({watchedMovies, setMovieDetails}) {
         totalScore = watchedMovies.length > 0 ? totalScore / watchedMovies.length : 0
 
         setTotalTime(totalTimeCalc);
-        setMedianScore(totalScore.toFixed(2));
+        setMedianScore(totalScore.toFixed(1));
         setTotalMovies(watchedMovies.length);
     }, [watchedMovies]); 
     
@@ -39,7 +39,7 @@ function WatchedList({watchedMovies, setMovieDetails}) {
                 </div>
                 <div className="mt-2">
                     {watchedMovies.map(movie => (
-                            <MovieTile data={movie}/>
+                            <MovieTile data={movie} isOnWatchList={true} setWatchedMovies={setWatchedMovies} watchedMovies={watchedMovies} setMovieDetails={setMovieDetails}/>
                     ))}
                 </div>
             </div>

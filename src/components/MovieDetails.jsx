@@ -1,6 +1,6 @@
 import { faArrowLeft, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) {
     const starsNumber = 10;
@@ -16,10 +16,13 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
     const [score, setScore] = useState(0);
     const [hoverIndex, setHoverIndex] = useState(-1);
 
+    useEffect(() => {
+        setScore(data.givedScore);
+    }, [])
+
     function addMovieToList(movieData){
-        let tempMovieData = structuredClone(movieData);
-        tempMovieData.givedScore = score;
-        setWatchedMovies([...watchedMovies, tempMovieData]);
+        movieData.givedScore = score;
+        setWatchedMovies([...watchedMovies, movieData]);
         setMovieDetails(null);
     }
 

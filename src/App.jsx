@@ -22,7 +22,7 @@ function App() {
           <MovieList setMovieDetails={setMovieDetails}/>
         </Card>
         <Card>
-          {movieDetails === null ? <WatchedList watchedMovies={watchedMovies} setMovieDetails={setMovieDetails}/> : <MovieDetails data={movieDetails} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} setWatchedMovies={setWatchedMovies}/>}
+          {movieDetails === null ? <WatchedList watchedMovies={watchedMovies} setMovieDetails={setMovieDetails} setWatchedMovies={setWatchedMovies}/> : <MovieDetails data={movieDetails} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} setWatchedMovies={setWatchedMovies}/>}
         </Card>
       </div>
      </div>
