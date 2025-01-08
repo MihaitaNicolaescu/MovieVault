@@ -25,11 +25,9 @@ function MovieTile({data, setMovieDetails, isOnWatchList, setWatchedMovies, watc
                         <p className="font-bold text-gray-300 text-[17px]">{data.original_title}</p>
                         <div className="grid grid-flow-col font-semibold text-gray-300 text-[14px]">
                             <p>🗓️ {getYear(data.release_date)}</p>
-                            {
-                                isOnWatchList !== undefined && isOnWatchList === true  && (
+                            {isOnWatchList !== undefined && isOnWatchList === true  && (
                                     <p className="ml-2">🌟 {data.givedScore}</p>
-                                )
-                            }
+                            )}
                             <p className="ml-2">⭐ {data.vote_average}</p>
                             {isOnWatchList !== undefined && isOnWatchList === true  && (
                                 <button className="ml-10 w-5 h-5 flex items-center justify-center text-white hover:text-red-50 text-[12px] bg-red-600 hover:bg-red-800 rounded-full shadow-md focus:outline-none"
