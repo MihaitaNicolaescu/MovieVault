@@ -6,11 +6,10 @@ function Navbar({setMovies, movies}) {
     useEffect(() => {
         const handler = setTimeout(() => {
             getMovies();
-        }, 2000); // 2 secunde
+        }, 2000);
 
         return () => {
-            clearTimeout(handler); // Curăță timeout-ul dacă searchTerm se modifică din nou înainte de 2 secunde
-        };
+            clearTimeout(handler);
     }, [searchMovie]);
 
     function getMovies(){
