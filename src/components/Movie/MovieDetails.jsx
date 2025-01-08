@@ -12,6 +12,28 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
         const year = date.getFullYear();
         return `${day} ${month} ${year}`;
     };
+    const genres = {
+        "28": "Action",
+        "12": "Adventure",
+        "16": "Animation",
+        "35": "Comedy",
+        "80": "Crime",
+        "99": "Documentary",
+        "18": "Drama",
+        "10751": "Family",
+        "14": "Fantasy",
+        "36": "History",
+        "27": "Horror",
+        "10402": "Music",
+        "9648": "Mystery",
+        "10749": "Romance",
+        "878": "Science Fiction",
+        "10770": "TV Movie",
+        "53": "Thriller",
+        "10752": "War",
+        "37": "Western"
+      };
+      
 
     const [score, setScore] = useState(0);
     const [hoverIndex, setHoverIndex] = useState(-1);
@@ -33,13 +55,12 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
                     onClick={() => {setMovieDetails(null)}}><FontAwesomeIcon icon={faArrowLeft} /></button>
             </div>
             <div className="flex">
-                <img className="w-[110px] h-[170px]" src={data.cover_image} alt="cover-image-movie" />
+                <img className="w-[110px] h-[170px]" src={data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-204x300.jpg'} alt="cover-image-movie" />
                 <div className="bg-gray-700 w-full flex">
                     <div className="grid grid-flow-row mt-2 left-0 ml-5 text-left">
-                        <p className="text-white font-semibold text-[17px]">{data.title}</p>
-                        <p className="text-white text-[13px]">{formatDate(data.release_date)} <strong>·</strong> {data.duration} min</p>
-                        <p className="text-white text-[13px]">{data.genres.join(', ')}</p>
-                        <p className="text-white text-[13px]">🌟{data.score} IMDb rating</p>
+                        <p className="text-white font-semibold text-[17px]">{data.original_title}</p>
+                        <p className="text-white text-[13px]">{Array.isArray(data.genre_ids) && data.genre_ids.length > 0 ? data.genre_ids.map(id => genres[id]).join(', ') : 'No genres available'}</p>
+                        <p className="text-white text-[13px]">🌟{data.vote_average} IMDb rating</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +70,7 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
                         <div className="flex items-center justify-center mt-2">
                             {Array.from({ length: starsNumber }).map((_, index) => (
                                 <FontAwesomeIcon
-                                key={index}
+                                key={index + "star"}
                                 icon={faStar}
                                 className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
                                     index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
@@ -74,9 +95,8 @@ function MovieDetails({data, setMovieDetails, watchedMovies, setWatchedMovies}) 
                     </div>
                 </div>
                 <div className="grid grid-flow-row font-semibold text-gray-300 text-[12px] text-left ml-10 mr-10 mt-4">
-                    <p className="italic mt-2">{data.summary}</p>
-                    <p className="mt-2">{data.cast.join(', ')}</p>
-                    <p className="mt-2"> Directed by {data.director}</p>
+                    <p className="italic mt-2">{data.overview}</p>
+                    <p className="mt-2">{Array.isArray(data.genre_ids) && data.genre_ids.length > 0 ? data.genre_ids.map(id => genres[id]).join(', ') : 'No genres available'}</p>
                 </div>
             </div>
         </div>

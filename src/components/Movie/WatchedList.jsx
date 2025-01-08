@@ -13,7 +13,7 @@ function WatchedList({watchedMovies, setMovieDetails, setWatchedMovies}) {
     
         watchedMovies.forEach((movieData) => {
             totalTimeCalc += movieData.duration;
-            totalScore += movieData.score;
+            totalScore += movieData.vote_average;
         });
     
         totalScore = watchedMovies.length > 0 ? totalScore / watchedMovies.length : 0
@@ -34,12 +34,11 @@ function WatchedList({watchedMovies, setMovieDetails, setWatchedMovies}) {
                     <div className="grid grid-flow-col text-white text-[13px]">
                         <p className="font-bold">🍿 {totalMovies} movies</p>
                         <p className="font-bold">🌟 {medianScore}</p>
-                        <p className="font-bold">⌛ {totalTime} min</p>
                     </div>
                 </div>
                 <div className="mt-2">
                     {watchedMovies.map(movie => (
-                            <MovieTile data={movie} isOnWatchList={true} setWatchedMovies={setWatchedMovies} watchedMovies={watchedMovies} setMovieDetails={setMovieDetails}/>
+                            <MovieTile key={movie.id} data={movie} isOnWatchList={true} setWatchedMovies={setWatchedMovies} watchedMovies={watchedMovies} setMovieDetails={setMovieDetails}/>
                     ))}
                 </div>
             </div>

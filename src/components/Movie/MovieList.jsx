@@ -1,7 +1,7 @@
-import { useState } from "react";
-import MovieTile from "./MovieTile";
+import { useEffect, useState } from "react";
+import MovieTile from "../Movie/MovieTile";
 
-function MovieList({setMovieDetails}) {
+function MovieList({setMovieDetails, movies}) {
     const [movieList, setMovieList] = useState([
       {
         "title": "Urban Odyssey",
@@ -41,8 +41,8 @@ function MovieList({setMovieDetails}) {
     return (
         <div id="movie-list">
           {
-            movieList.map(movie => (
-                <MovieTile data={movie} setMovieDetails={setMovieDetails}/>
+            movies.map(movie => (
+                <MovieTile key={movie.id} data={movie} setMovieDetails={setMovieDetails}/>
             ))
           }
         </div>
