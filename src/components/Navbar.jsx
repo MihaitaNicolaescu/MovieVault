@@ -6,7 +6,7 @@ function Navbar({setMovies, movies}) {
     useEffect(() => {
         const handler = setTimeout(() => {
             getMovies();
-        }, 2000);
+        }, 1000);
 
         return () => {
             clearTimeout(handler);
