@@ -10,6 +10,7 @@ function Navbar({setMovies, movies}) {
 
         return () => {
             clearTimeout(handler);
+        };
     }, [searchMovie]);
 
     function getMovies(){
