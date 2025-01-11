@@ -35,7 +35,6 @@ function Navbar({setMovies, movies}) {
         .catch((err) => console.error(err));
     }
 
-
     return (
     <div className='bg-[#2e343d]-500'>
         <div className='place-items-center'>
@@ -50,7 +49,6 @@ function Navbar({setMovies, movies}) {
                     {
                         movies.length > 0 && (<p className="text-white">Found <strong>{movies.length}</strong> results</p>)
                     }
-                    
                 </div>
             </div>
         </div>
