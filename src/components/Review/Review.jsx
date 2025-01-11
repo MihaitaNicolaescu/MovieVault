@@ -1,28 +1,20 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Review({setWatchedMovies, setMovieDetails, watchedMovies, data}){
+    const movieInWatched = watchedMovies.find((movie) => movie.title === data.title);
+
     const starsNumber = 10;
     const [hoverIndex, setHoverIndex] = useState(-1);
-    const [alreadyReviewed, setAlreadyReviewed] = useState(false);
-    const [score, setScore] = useState(0);
+    const [alreadyReviewed, setAlreadyReviewed] = useState(movieInWatched !== undefined);
+    const [score, setScore] = useState(movieInWatched?.givedScore);
 
     function addMovieToList(movieData){
         movieData.givedScore = score;
         setWatchedMovies([...watchedMovies, movieData]);
         setMovieDetails(null);
     }
-
-    useEffect(() => {
-        const movieInWatched = watchedMovies.find((movie) => movie.title === data.title);
-
-        if (movieInWatched) {
-            setAlreadyReviewed(true);
-            setScore(movieInWatched.givedScore);
-        }
-    }, [])
-
 
     return (
         <div className="grid grid-flow-row">
@@ -33,21 +25,18 @@ function Review({setWatchedMovies, setMovieDetails, watchedMovies, data}){
                             <div className="flex items-center justify-center mt-2">
                                 {Array.from({ length: starsNumber }).map((_, index) => (
                                     <FontAwesomeIcon
-                                    key={index + "star"}
-                                    icon={faStar}
-                                    className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
-                                        index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
-                                    }`}
-                                    onClick={() => setScore(index + 1)}
-                                    onMouseEnter={() => setHoverIndex(index)}
-                                    onMouseLeave={() => setHoverIndex(-1)}
-                                    
+                                        key={index + "star"}
+                                        icon={faStar}
+                                        className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
+                                            index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
+                                        }`}
+                                        onClick={() => setScore(index + 1)}
+                                        onMouseEnter={() => setHoverIndex(index)}
+                                        onMouseLeave={() => setHoverIndex(-1)}
                                     />
                                 ))}
                                 {(hoverIndex !== -1 || score !== undefined) && (
-                                    <p className="text-yellow-400 font-bold text-center pl-2 text-[19px]">
-                                        {hoverIndex !== -1 ? hoverIndex + 1 : score}
-                                    </p>
+                                    <p className="text-yellow-400 font-bold text-center pl-2 text-[19px]">{hoverIndex !== -1 ? hoverIndex + 1 : score}</p>
                                 )}
                             </div>
                             <div className="flex items-center justify-center mt-2 mb-2">

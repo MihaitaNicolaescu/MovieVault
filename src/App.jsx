@@ -9,7 +9,6 @@ import DetailsPanel from './components/DetailsPanel.jsx'
 function App() {
 
   const [movieDetails, setMovieDetails] = useState(null);
-  const [watchedMovies, setWatchedMovies] = useState([]);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ function App() {
           <MovieList setMovieDetails={setMovieDetails} movies={movies}/>
         </Card>
         <Card>
-         <DetailsPanel movieDetails={movieDetails} watchedMovies={watchedMovies} setMovieDetails={setMovieDetails} setWatchedMovies={setWatchedMovies} />
+         <DetailsPanel movieDetails={movieDetails} setMovieDetails={setMovieDetails} />
         </Card>
       </Main>
     </>

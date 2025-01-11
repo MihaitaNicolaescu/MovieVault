@@ -5,8 +5,11 @@ import BackButton from "./Buttons/BackButton";
 import MovieCard from "./Movie/MovieCard";
 import Review from "./Review/Review";
 import MovieDescription from "./Movie/MovieDescription";
+import { useState } from "react";
 
-function DetailsPanel({movieDetails,watchedMovies, setMovieDetails, setWatchedMovies}){
+function DetailsPanel({movieDetails, setMovieDetails}){
+    const [watchedMovies, setWatchedMovies] = useState([]);
+
     if(movieDetails === null){
         return (
             <>
@@ -16,12 +19,12 @@ function DetailsPanel({movieDetails,watchedMovies, setMovieDetails, setWatchedMo
     } else {
         return (
             <>
-            <MovieDetails>
-                <BackButton icon={faArrowLeft} action={() => {setMovieDetails(null)}}/>
-                <MovieCard data={movieDetails} />
-                <Review setWatchedMovies={setWatchedMovies} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} data={movieDetails}></Review>
-                <MovieDescription data={movieDetails} />
-            </MovieDetails>
+                <MovieDetails>
+                    <BackButton icon={faArrowLeft} action={() => {setMovieDetails(null)}}/>
+                    <MovieCard data={movieDetails} />
+                    <Review setWatchedMovies={setWatchedMovies} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} data={movieDetails}></Review>
+                    <MovieDescription data={movieDetails} />
+                </MovieDetails>
             </>
         )
     }

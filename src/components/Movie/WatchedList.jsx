@@ -8,17 +8,15 @@ function WatchedList({watchedMovies, setMovieDetails, setWatchedMovies}) {
 
     useEffect(() => {
         let totalScore = 0;
-    
+        
         watchedMovies.forEach((movieData) => {
             totalScore += movieData.vote_average;
         });
-    
         totalScore = watchedMovies.length > 0 ? totalScore / watchedMovies.length : 0
 
         setMedianScore(totalScore.toFixed(1));
         setTotalMovies(watchedMovies.length);
     }, [watchedMovies]); 
-    
 
     return (
         <>

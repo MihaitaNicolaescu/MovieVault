@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 function Navbar({setMovies, movies}) {
     const [searchMovie, setSearchMovie] = useState('');
+    let debounceTime = useRef(null);
 
-    useEffect(() => {
-        const handler = setTimeout(() => {
+    function handleSearchChange(value) {
+        clearTimeout(debounceTime.current);
+        debounceTime.current = setTimeout(() => {
             getMovies();
         }, 1000);
 
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [searchMovie]);
+        setSearchMovie(value);
+    }
 
     function getMovies(){
         const options = {
@@ -43,12 +43,10 @@ function Navbar({setMovies, movies}) {
                     <p className="block mb-2 text-2xl content-center font-extrabold text-white p-1 font-sans">movieVault 🗄️</p>
                 </div>
                 <div className="flex items-center justify-center">
-                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {setSearchMovie(e.target.value)}} />
+                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {handleSearchChange(e.target.value)}} />
                 </div>
                 <div className="flex items-center justify-center">
-                    {
-                        movies.length > 0 && (<p className="text-white">Found <strong>{movies.length}</strong> results</p>)
-                    }
+                    {movies.length > 0 && (<p className="text-white">Found <strong>{movies.length}</strong> results</p>)}
                 </div>
             </div>
         </div>
