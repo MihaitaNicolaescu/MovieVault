@@ -23,21 +23,25 @@ function Review({setWatchedMovies, setMovieDetails, watchedMovies, data}){
                     {alreadyReviewed === false && (
                         <>
                             <div className="flex items-center justify-center mt-2">
-                                {Array.from({ length: starsNumber }).map((_, index) => (
-                                    <FontAwesomeIcon
-                                        key={index + "star"}
-                                        icon={faStar}
-                                        className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
-                                            index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
-                                        }`}
-                                        onClick={() => setScore(index + 1)}
-                                        onMouseEnter={() => setHoverIndex(index)}
-                                        onMouseLeave={() => setHoverIndex(-1)}
-                                    />
-                                ))}
-                                {(hoverIndex !== -1 || score !== undefined) && (
-                                    <p className="text-yellow-400 font-bold text-center pl-2 text-[19px]">{hoverIndex !== -1 ? hoverIndex + 1 : score}</p>
-                                )}
+                                <div className="flex-initial mt-1 w-4/3 ">
+                                    {Array.from({ length: starsNumber }).map((_, index) => (
+                                        <FontAwesomeIcon
+                                            key={index + "star"}
+                                            icon={faStar}
+                                            className={`mt-2 mb-2 text-[18px] transition-colors duration-200 ${
+                                                index < (hoverIndex !== -1 ? hoverIndex + 1 : score) ? 'text-yellow-400' : 'text-gray-400'
+                                            }`}
+                                            onClick={() => setScore(index + 1)}
+                                            onMouseEnter={() => setHoverIndex(index)}
+                                            onMouseLeave={() => setHoverIndex(-1)}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="flex-initial w-10">
+                                    {(hoverIndex !== -1 || score !== undefined) && (
+                                        <p className="text-yellow-400 font-bold text-center pl-2 text-[19px]">{hoverIndex !== -1 ? hoverIndex + 1 : score}</p>
+                                    )}
+                                </div>
                             </div>
                             <div className="flex items-center justify-center mt-2 mb-2">
                                 {score > 0 && (
