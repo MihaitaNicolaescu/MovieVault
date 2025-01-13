@@ -19,7 +19,7 @@ function DetailsPanel({movieDetails, setMovieDetails}){
     } else {
         return (
             <>
-                <MovieDetails>
+                <MovieDetails key={movieDetails.poster_path}>
                     <BackButton icon={faArrowLeft} action={() => {setMovieDetails(null)}}/>
                     <MovieCard data={movieDetails} />
                     <Review setWatchedMovies={setWatchedMovies} setMovieDetails={setMovieDetails} watchedMovies={watchedMovies} data={movieDetails}></Review>
