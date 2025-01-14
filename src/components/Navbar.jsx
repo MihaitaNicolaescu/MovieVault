@@ -1,39 +1,4 @@
-import { useRef, useState } from "react";
-
-function Navbar({setMovies, movies}) {
-    const [searchMovie, setSearchMovie] = useState('');
-    let debounceTime = useRef(null);
-
-    function handleSearchChange(value) {
-        clearTimeout(debounceTime.current);
-        debounceTime.current = setTimeout(() => {
-            getMovies();
-        }, 1000);
-
-        setSearchMovie(value);
-    }
-
-    function getMovies(){
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTcyN2NlZGY0NDQzYmJjZmFlMGE5YzA2MWYxYmZiZiIsIm5iZiI6MTczNjM2MDI4Ny4xNDgsInN1YiI6IjY3N2VjMTVmMzg4MWM3OTQxOWJiMWM2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yP-6_YrmUlQBmkEY8LADdDZkOmnTYcp3aPPUZBneiQE'
-            }
-          };
-          
-        fetch(`https://api.themoviedb.org/3/search/movie?query=${searchMovie}&include_adult=false&language=en-US&page=1`, options)
-        .then((res) => {
-            if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
-        })
-        .then((data) => {
-            setMovies(data.results);
-        })
-        .catch((err) => console.error(err));
-    }
+function Navbar({movies, setSearchMovie, searchMovie}) {
 
     return (
     <div className='bg-[#2e343d]-500'>
@@ -43,7 +8,7 @@ function Navbar({setMovies, movies}) {
                     <p className="block mb-2 text-2xl content-center font-extrabold text-white p-1 font-sans">movieVault 🗄️</p>
                 </div>
                 <div className="flex items-center justify-center">
-                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {handleSearchChange(e.target.value)}} />
+                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {setSearchMovie(e.target.value)}} />
                 </div>
                 <div className="flex items-center justify-center">
                     {movies.length > 0 && (<p className="text-white">Found <strong>{movies.length}</strong> results</p>)}
