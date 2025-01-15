@@ -1,4 +1,14 @@
+import { useRef } from "react";
+import { useKey } from "./CustomHooks/useKey";
+
 function Navbar({movies, setSearchMovie, searchMovie}) {
+
+    const inputEL = useRef(null);
+
+    useKey("Enter", () => {
+        inputEL.current.focus();
+        setSearchMovie('');
+    })
 
     return (
     <div className='bg-[#2e343d]-500'>
@@ -8,7 +18,7 @@ function Navbar({movies, setSearchMovie, searchMovie}) {
                     <p className="block mb-2 text-2xl content-center font-extrabold text-white p-1 font-sans">movieVault 🗄️</p>
                 </div>
                 <div className="flex items-center justify-center">
-                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {setSearchMovie(e.target.value)}} />
+                    <input type="text" id="search" className="rounded-lg w-full py-2 px-3 text-white bg-purple-600 placeholder:text-gray-300" placeholder="Search movie" value={searchMovie} onChange={(e) => {setSearchMovie(e.target.value)}} ref={inputEL}/>
                 </div>
                 <div className="flex items-center justify-center">
                     {movies.length > 0 && (<p className="text-white">Found <strong>{movies.length}</strong> results</p>)}

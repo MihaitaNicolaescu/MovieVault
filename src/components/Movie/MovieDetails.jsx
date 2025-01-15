@@ -1,19 +1,7 @@
-import { useEffect } from "react";
+import { useKey } from "../CustomHooks/useKey";
 
 function MovieDetails({children, setMovieDetails}) {
-    useEffect(() => {
-        document.addEventListener('keydown', escapePressed);
-
-        return () => {
-            document.removeEventListener('keydown', escapePressed);
-        }
-    }, []);
-
-    function escapePressed(event){
-        if (event.key === 'Escape') {
-            setMovieDetails(null);
-        }
-    }
+    useKey("Escape", () => setMovieDetails(null));
 
     return (
         <div className="grid grid-flow-row ">
