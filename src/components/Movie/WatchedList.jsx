@@ -16,6 +16,8 @@ function WatchedList({watchedMovies, setMovieDetails, setWatchedMovies}) {
 
         setMedianScore(totalScore.toFixed(1));
         setTotalMovies(watchedMovies.length);
+
+        localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
     }, [watchedMovies]); 
 
     return (

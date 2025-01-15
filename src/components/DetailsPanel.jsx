@@ -8,7 +8,7 @@ import MovieDescription from "./Movie/MovieDescription";
 import { useState } from "react";
 
 function DetailsPanel({movieDetails, setMovieDetails}){
-    const [watchedMovies, setWatchedMovies] = useState([]);
+    const [watchedMovies, setWatchedMovies] = useState(JSON.parse(localStorage.getItem("watchedMovies")) || []);
 
     if(movieDetails === null){
         return (
